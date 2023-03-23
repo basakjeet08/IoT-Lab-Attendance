@@ -13,3 +13,4 @@
 .externalNativeBuild
 .cxx
 local.properties
+/app/src/main/java/in/iot/lab/iotlabattendance/core/util/Constants.kt
