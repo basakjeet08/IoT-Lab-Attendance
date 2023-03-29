@@ -2,8 +2,8 @@ package `in`.iot.lab.iotlabattendance.feature_home.presentation.screen
 
 import android.content.res.Configuration
 import androidx.compose.material3.Text
+
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 
@@ -16,15 +16,15 @@ import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 @Composable
 private fun DefaultPreviewLoading() {
     CustomAppTheme {
-        WorkUpdateScreen()
+        WorkUpdateHistoryScreen()
     }
 }
 
 @Composable
-fun WorkUpdateScreen(
-    modifier: Modifier = Modifier
+fun WorkUpdateHistoryScreen(
+
 ) {
     Text(
-        text = "Work Update Screen"
+        text = "Work Update History Screen"
     )
 }

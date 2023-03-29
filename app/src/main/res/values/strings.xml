@@ -2,4 +2,9 @@
     <string name="app_name">IoT Lab Attendance</string>
     <string name="attendance">Attendance</string>
     <string name="work_updates">Work Updates</string>
+    <string name="title_activity_home">HomeActivity</string>
+
+    <string name="updates">Updates</string>
+    <string name="post">Post</string>
+    <string name="back">Back</string>
 </resources>
