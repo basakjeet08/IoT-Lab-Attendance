@@ -1,4 +1,4 @@
-package com.eterncare.sweetandroid.core.theme.custom_icons
+package `in`.iot.lab.iotlabattendance.core.theme.custom_icons
 
 import androidx.compose.material.icons.materialIcon
 import androidx.compose.material.icons.materialPath

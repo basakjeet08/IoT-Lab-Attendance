@@ -51,7 +51,12 @@ sealed class BottomNavOptions(
         labelOfIcon = R.string.post,
         unselectedIcon = Icons.Outlined.Email,
         selectedIcon = Icons.Filled.Email,
-        onOptionClicked = { it.navigate(BottomNavRoutes.AttendanceRoute.route) }
+        onOptionClicked = {
+            it.navigate(BottomNavRoutes.AttendanceRoute.route) {
+                popUpTo(it.graph.startDestinationId)
+                launchSingleTop = true
+            }
+        }
     )
 
     // Work Update Post Option
@@ -60,7 +65,12 @@ sealed class BottomNavOptions(
         labelOfIcon = R.string.attendance,
         unselectedIcon = Icons.Outlined.Home,
         selectedIcon = Icons.Filled.Home,
-        onOptionClicked = { it.navigate(BottomNavRoutes.WorkUpdatePostRoute.route) }
+        onOptionClicked = {
+            it.navigate(BottomNavRoutes.WorkUpdatePostRoute.route) {
+                popUpTo(it.graph.startDestinationId)
+                launchSingleTop = true
+            }
+        }
     )
 
     // Work Update History Option
@@ -69,6 +79,11 @@ sealed class BottomNavOptions(
         labelOfIcon = R.string.updates,
         unselectedIcon = Icons.Outlined.Person,
         selectedIcon = Icons.Filled.Person,
-        onOptionClicked = { it.navigate(BottomNavRoutes.WorkUpdateHistoryRoute.route) }
+        onOptionClicked = {
+            it.navigate(BottomNavRoutes.WorkUpdateHistoryRoute.route) {
+                popUpTo(it.graph.startDestinationId)
+                launchSingleTop = true
+            }
+        }
     )
 }
