@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import `in`.iot.lab.iotlabattendance.core.util.AuthenticatedUserData
 import `in`.iot.lab.iotlabattendance.feature_home.data.repository.Repository
 import `in`.iot.lab.iotlabattendance.feature_home.util.GetAttendanceUiState
 import kotlinx.coroutines.launch
@@ -21,9 +22,12 @@ class AttendanceViewModel : ViewModel() {
     )
         private set
 
+    var userRoll: String by mutableStateOf(AuthenticatedUserData.userRoll!!)
+        private set
+
 
     //This calls the repository and ask it to fetch data of roll without filter
-    fun getPostByRoll(number: String) {
+    fun getPostByRoll(number: String = userRoll) {
 
         // Setting the Current State to Loading Before Starting to Fetch Data
         getAttendanceUiState = GetAttendanceUiState.Loading
@@ -94,5 +98,9 @@ class AttendanceViewModel : ViewModel() {
                 GetAttendanceUiState.Failure("No Internet Connection")
             }
         }
+    }
+
+    fun updateUserRoll(newRoll: String) {
+        userRoll = newRoll
     }
 }

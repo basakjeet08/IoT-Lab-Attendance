@@ -148,7 +148,10 @@ class RegisterViewModel : ViewModel() {
                     .set(user)
                     // This block executes if the Request is Success
                     .addOnSuccessListener {
+
+                        firebaseAuth.signOut()
                         registrationState = RegistrationState.Success
+
                     }
                     // This block executes if the Request is UnSuccessful
                     .addOnFailureListener {

@@ -1,7 +1,6 @@
 package `in`.iot.lab.iotlabattendance.feature_bottom_navigation
 
 import android.os.Bundle
-import android.util.Log.d
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
@@ -13,7 +12,6 @@ import androidx.compose.ui.Modifier
 import androidx.navigation.compose.rememberNavController
 import `in`.iot.lab.iotlabattendance.R
 import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
-import `in`.iot.lab.iotlabattendance.core.util.AuthenticatedUserData
 import `in`.iot.lab.iotlabattendance.feature_bottom_navigation.components.AppBar
 import `in`.iot.lab.iotlabattendance.feature_bottom_navigation.navigation.BottomBar
 import `in`.iot.lab.iotlabattendance.feature_bottom_navigation.navigation.BottomNavOptions
@@ -28,14 +26,6 @@ class HomeActivity : ComponentActivity() {
                 // Setting the navHost controller for this Class which takes care of the rest
                 // of the navigation
                 val navController = rememberNavController()
-
-
-                d(
-                    "Home Activity",
-                    "Email : ${AuthenticatedUserData.userEmail} Role : ${AuthenticatedUserData.userRole} Roll : ${AuthenticatedUserData.userRoll}"
-                )
-
-
 
                 Scaffold(
                     topBar = {

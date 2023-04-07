@@ -6,5 +6,5 @@ package `in`.iot.lab.iotlabattendance.feature_home.data.model
  * @param attendanceData This contains a list of attendance Data
  */
 data class AttendanceResponseData(
-    val attendanceData: List<AttendanceData>
+    val attendanceData: List<AttendanceData>?
 )
