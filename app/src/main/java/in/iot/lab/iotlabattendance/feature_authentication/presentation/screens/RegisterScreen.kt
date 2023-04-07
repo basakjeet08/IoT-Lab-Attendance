@@ -24,8 +24,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.stateholder.RegisterViewModel
-import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.util.RegistrationState
 import `in`.iot.lab.iotlabattendance.R
 import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 import `in`.iot.lab.iotlabattendance.core.theme.buttonShape
@@ -35,6 +33,8 @@ import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.compone
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.TextButtonUI
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.UserInputUI
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.navigation.AuthenticationRoutes
+import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.stateholder.RegisterViewModel
+import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.util.RegistrationState
 
 // This is the Preview function of the Login Screen
 @Preview("Light")
@@ -198,10 +198,10 @@ fun RegisterScreen(
 
                 // Admin Request CheckBox
                 CheckBoxUI(
-                    checked = myViewModel.checked,
+                    checked = myViewModel.askedForAdminRole,
                     textToShow = R.string.are_you_an_admin
                 ) {
-                    myViewModel.updateChecked(it)
+                    myViewModel.updateAskedForAdminRole(it)
                 }
 
                 // Spacing of 24dp

@@ -1,5 +1,7 @@
 package `in`.iot.lab.iotlabattendance.feature_authentication.presentation.screens
 
+import android.app.Activity
+import android.content.Intent
 import android.content.res.Configuration
 import android.widget.Toast
 import androidx.compose.foundation.layout.*
@@ -24,8 +26,6 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
-import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.stateholder.LoginViewModel
-import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.util.LoginState
 import `in`.iot.lab.iotlabattendance.R
 import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 import `in`.iot.lab.iotlabattendance.core.theme.buttonShape
@@ -34,6 +34,9 @@ import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.compone
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.TextButtonUI
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.UserInputUI
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.navigation.AuthenticationRoutes
+import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.stateholder.LoginViewModel
+import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.util.LoginState
+import `in`.iot.lab.iotlabattendance.feature_bottom_navigation.HomeActivity
 
 
 // This is the Preview function of the Login Screen
@@ -71,6 +74,10 @@ fun LoginScreen(
             // Resetting all the Values
             myViewModel.resetToDefault()
             Toast.makeText(context, "Login Successful", Toast.LENGTH_SHORT).show()
+
+            // Redirecting to the Home Activity
+            context.startActivity(Intent(context , HomeActivity::class.java))
+            (context as Activity).finish()
         }
         is LoginState.Loading -> {
             loginRequestEmpty = false

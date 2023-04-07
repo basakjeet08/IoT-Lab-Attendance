@@ -1,6 +1,5 @@
 package `in`.iot.lab.iotlabattendance.feature_authentication.presentation.stateholder
 
-import android.util.Log.d
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
@@ -19,33 +18,40 @@ class RegisterViewModel : ViewModel() {
     // Firebase Authentication Variable
     private val firebaseAuth: FirebaseAuth = FirebaseAuth.getInstance()
 
+    // Fire Store Instance Variable
+    private val fireStoreDB = Firebase.firestore
+
+    // Email Inputted by the User
     var userInputEmail: String by mutableStateOf("")
         private set
 
+    // Password Inputted by the User
     var userInputPassword: String by mutableStateOf("")
         private set
 
+    // Confirm Password Inputted by the User
     var userInputRePassword: String by mutableStateOf("")
         private set
 
-    // Variable which records whether to show the Password Entered by the User
+    // Variable to Toggle whether to show password to the user
     var showEnterPassword: Boolean by mutableStateOf(false)
         private set
 
-    // Variable which records whether to show the Password Entered by the User
+    // Variable to Toggle whether to show confirm password to the user
     var showReEnterPassword: Boolean by mutableStateOf(false)
         private set
 
-    var checked: Boolean by mutableStateOf(false)
+    // Variable which checks if the User asked for Admin Role
+    var askedForAdminRole: Boolean by mutableStateOf(false)
         private set
 
+    // Keeps the Registration Related API calls State
     var registrationState: RegistrationState by mutableStateOf(RegistrationState.Initialized)
         private set
 
-    fun updateChecked(newValue: Boolean) {
-        checked = newValue
+    fun updateAskedForAdminRole(newValue: Boolean) {
+        askedForAdminRole = newValue
     }
-
 
     fun updateUserInputEmail(newEmail: String) {
         userInputEmail = newEmail
@@ -85,7 +91,6 @@ class RegisterViewModel : ViewModel() {
         showReEnterPassword = !showReEnterPassword
     }
 
-
     fun resetToDefaults() {
         userInputEmail = ""
         userInputPassword = ""
@@ -95,54 +100,65 @@ class RegisterViewModel : ViewModel() {
         registrationState = RegistrationState.Initialized
     }
 
+    // This function registers a new user in Firebase
     fun postSignInRequestFirebase() {
 
+        // Changing the State to Loading Before Going for API Calls
         registrationState = RegistrationState.Loading
 
+        // Checking if the email is a KIIT Email
         if (!userInputEmail.contains("@kiit.ac.in")) {
             registrationState = RegistrationState.Failure("Have to use a KIIT Email ID")
             return
         }
 
+        // Checking if the fields are empty or not
         if (userInputEmail.isEmpty() || userInputPassword.isEmpty() || userInputRePassword.isEmpty()) {
             registrationState = RegistrationState.Failure(errorMessage = "Enter All the Data")
             return
         }
 
+        // Checking if the password and confirm password are same
         if (userInputPassword != userInputRePassword) {
             registrationState = RegistrationState.Failure(errorMessage = "Passwords doesn't Match")
             return
         }
 
-
+        // Calling the Firebase to register the User
         firebaseAuth.createUserWithEmailAndPassword(userInputEmail, userInputPassword)
+            // This block executes if the Request is Success
             .addOnSuccessListener {
+                // Extracting Roll number from the email
+                val email = it.user?.email
 
+                // Requested Role of the User
+                val role = if (askedForAdminRole)
+                    "requested"
+                else
+                    "user"
 
-                val roll = it.user?.email?.replace("@kiit.ac.in", "").toString()
-
-                d("Roll ", roll)
-
-                val fireStoreDB = Firebase.firestore
-
-                val user = hashMapOf<String, Any>(
-                    "Roll Number" to roll.toInt(),
-                    "role" to "user"
+                // User Hashmap to be saved in Fire Store
+                val user = hashMapOf<String, Any?>(
+                    "Email" to email,
+                    "role" to role
                 )
 
-                fireStoreDB.collection("Users").document(roll)
+                // Storing the User Data in Fire Store
+                fireStoreDB.collection("Users").document(email!!)
                     .set(user)
+                    // This block executes if the Request is Success
                     .addOnSuccessListener {
-                        d("Adding User Data", "Success")
+                        registrationState = RegistrationState.Success
                     }
+                    // This block executes if the Request is UnSuccessful
                     .addOnFailureListener {
-                        d("Adding User Data", "Failed")
+                        registrationState = RegistrationState.Failure("User Data wasn't Sent")
                     }
-
-                registrationState = RegistrationState.Success
-                d("Registration State", "State")
             }
+            // This block executes if the Request is UnSuccessful
             .addOnFailureListener {
+
+                // Checking which exception it is and warning the User Accordingly
                 registrationState = when (it) {
                     is FirebaseAuthUserCollisionException -> RegistrationState.Failure(
                         "User Already Present"

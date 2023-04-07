@@ -48,7 +48,7 @@ sealed class BottomNavOptions(
     // Attendance Option
     object AttendanceOption : BottomNavOptions(
         route = BottomNavRoutes.AttendanceRoute.route,
-        labelOfIcon = R.string.post,
+        labelOfIcon = R.string.attendance,
         unselectedIcon = Icons.Outlined.Email,
         selectedIcon = Icons.Filled.Email,
         onOptionClicked = {
@@ -62,7 +62,7 @@ sealed class BottomNavOptions(
     // Work Update Post Option
     object WorkUpdatePostOption : BottomNavOptions(
         route = BottomNavRoutes.WorkUpdatePostRoute.route,
-        labelOfIcon = R.string.attendance,
+        labelOfIcon = R.string.post,
         unselectedIcon = Icons.Outlined.Home,
         selectedIcon = Icons.Filled.Home,
         onOptionClicked = {
