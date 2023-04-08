@@ -26,7 +26,7 @@ import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 @Composable
 private fun DefaultPreview() {
     CustomAppTheme {
-        TextButtonUI(textToShow = R.string.app_name) {}
+        TextButtonUI(textToShow = R.string.create_an_account) {}
     }
 }
 

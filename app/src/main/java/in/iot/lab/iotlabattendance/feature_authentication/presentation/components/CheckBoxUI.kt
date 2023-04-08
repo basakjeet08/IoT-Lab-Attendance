@@ -28,7 +28,7 @@ private fun DefaultPreview() {
     CustomAppTheme {
         CheckBoxUI(
             checked = true,
-            textToShow = R.string.app_name
+            textToShow = R.string.are_you_an_admin
         ) { }
     }
 }

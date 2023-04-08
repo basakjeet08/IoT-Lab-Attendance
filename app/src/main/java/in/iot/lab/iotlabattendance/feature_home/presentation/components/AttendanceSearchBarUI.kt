@@ -95,7 +95,9 @@ fun AttendanceSearchBarUI(
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Number
             ),
-            modifier = Modifier.width(200.dp)
+            modifier = Modifier
+                .width(100.dp)
+                .weight(weight = 1f, fill = true)
         )
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -109,7 +111,7 @@ fun AttendanceSearchBarUI(
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer
             ),
-            contentPadding = PaddingValues(8.dp)
+            contentPadding = PaddingValues(12.dp)
         ) {
 
             Text(
@@ -129,7 +131,7 @@ fun AttendanceSearchBarUI(
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer
             ),
-            contentPadding = PaddingValues(8.dp)
+            contentPadding = PaddingValues(12.dp)
         ) {
 
             Text(

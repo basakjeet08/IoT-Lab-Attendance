@@ -13,8 +13,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 import `in`.iot.lab.iotlabattendance.R
+import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 
 // Preview Function For Both Light and Dark Mode of the App
 @Preview("Light")
@@ -26,7 +26,7 @@ import `in`.iot.lab.iotlabattendance.R
 private fun DefaultPreview() {
     CustomAppTheme() {
         UserInputUI(
-            inputFieldLabel = R.string.app_name,
+            inputFieldLabel = R.string.roll_no,
             userInput = "",
             keyboardActions = KeyboardActions(),
             keyboardOptions = KeyboardOptions()

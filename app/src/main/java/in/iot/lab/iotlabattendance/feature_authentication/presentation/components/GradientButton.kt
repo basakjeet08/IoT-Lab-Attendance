@@ -35,7 +35,7 @@ private fun DefaultPreview() {
     CustomAppTheme() {
         GradientButton(
             buttonShape = MaterialTheme.shapes.medium,
-            buttonText = R.string.app_name
+            buttonText = R.string.login
         ) {}
     }
 }

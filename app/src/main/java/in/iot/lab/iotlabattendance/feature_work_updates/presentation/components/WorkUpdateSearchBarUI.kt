@@ -109,7 +109,10 @@ fun WorkUpdateSearchBarUI(
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Number
-            )
+            ),
+            modifier = Modifier
+                .width(100.dp)
+                .weight(weight = 1f, fill = true)
         )
 
         // Spacing of 16 dp
@@ -124,7 +127,7 @@ fun WorkUpdateSearchBarUI(
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer
             ),
-            contentPadding = PaddingValues(8.dp)
+            contentPadding = PaddingValues(12.dp)
         ) {
 
             // This is the Text inside the Button
