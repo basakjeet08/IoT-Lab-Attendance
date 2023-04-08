@@ -10,7 +10,7 @@ package `in`.iot.lab.iotlabattendance.feature_work_updates.data.model
  */
 data class WorkUpdateData(
     val date_created: String,
-    val date_updated: String,
+    val date_updated: String?,
     val roll: String,
     val updates: String
 )

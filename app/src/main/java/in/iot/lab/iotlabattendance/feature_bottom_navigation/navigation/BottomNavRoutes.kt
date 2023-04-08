@@ -2,7 +2,7 @@ package `in`.iot.lab.iotlabattendance.feature_bottom_navigation.navigation
 
 import `in`.iot.lab.iotlabattendance.feature_bottom_navigation.navigation.BottomNavRoutes.*
 import `in`.iot.lab.iotlabattendance.feature_home.presentation.screen.AttendanceScreen
-import `in`.iot.lab.iotlabattendance.feature_home.presentation.screen.WorkUpdateHistoryScreen
+import `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.screens.WorkUpdateHistoryScreen
 import `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.screens.WorkUpdatePostScreen
 
 /**

@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import `in`.iot.lab.iotlabattendance.feature_home.presentation.screen.AttendanceScreen
-import `in`.iot.lab.iotlabattendance.feature_home.presentation.screen.WorkUpdateHistoryScreen
+import `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.screens.WorkUpdateHistoryScreen
 import `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.screens.WorkUpdatePostScreen
 
 /**
