@@ -1,14 +1,6 @@
 package `in`.iot.lab.iotlabattendance.feature_bottom_navigation.navigation
 
 import androidx.annotation.StringRes
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Email
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Person
-import androidx.compose.material.icons.outlined.Email
-import androidx.compose.material.icons.outlined.Home
-import androidx.compose.material.icons.outlined.Person
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.navigation.NavController
 import `in`.iot.lab.iotlabattendance.R
 import `in`.iot.lab.iotlabattendance.feature_bottom_navigation.navigation.BottomNavOptions.*
@@ -31,8 +23,8 @@ import `in`.iot.lab.iotlabattendance.feature_bottom_navigation.navigation.Bottom
 sealed class BottomNavOptions(
     val route: String,
     @StringRes val labelOfIcon: Int,
-    val unselectedIcon: ImageVector,
-    val selectedIcon: ImageVector,
+    val unselectedIcon: Int,
+    val selectedIcon: Int,
     val onOptionClicked: (NavController) -> Unit
 ) {
 
@@ -49,8 +41,8 @@ sealed class BottomNavOptions(
     object AttendanceOption : BottomNavOptions(
         route = BottomNavRoutes.AttendanceRoute.route,
         labelOfIcon = R.string.attendance,
-        unselectedIcon = Icons.Outlined.Email,
-        selectedIcon = Icons.Filled.Email,
+        unselectedIcon = R.drawable.ballot,
+        selectedIcon = R.drawable.ballot_filled,
         onOptionClicked = {
             it.navigate(BottomNavRoutes.AttendanceRoute.route) {
                 popUpTo(it.graph.startDestinationId)
@@ -63,8 +55,8 @@ sealed class BottomNavOptions(
     object WorkUpdatePostOption : BottomNavOptions(
         route = BottomNavRoutes.WorkUpdatePostRoute.route,
         labelOfIcon = R.string.post,
-        unselectedIcon = Icons.Outlined.Home,
-        selectedIcon = Icons.Filled.Home,
+        unselectedIcon = R.drawable.add_box,
+        selectedIcon = R.drawable.add_box_filled,
         onOptionClicked = {
             it.navigate(BottomNavRoutes.WorkUpdatePostRoute.route) {
                 popUpTo(it.graph.startDestinationId)
@@ -77,8 +69,8 @@ sealed class BottomNavOptions(
     object WorkUpdateHistoryOption : BottomNavOptions(
         route = BottomNavRoutes.WorkUpdateHistoryRoute.route,
         labelOfIcon = R.string.updates,
-        unselectedIcon = Icons.Outlined.Person,
-        selectedIcon = Icons.Filled.Person,
+        unselectedIcon = R.drawable.analytics,
+        selectedIcon = R.drawable.analytics_filled,
         onOptionClicked = {
             it.navigate(BottomNavRoutes.WorkUpdateHistoryRoute.route) {
                 popUpTo(it.graph.startDestinationId)

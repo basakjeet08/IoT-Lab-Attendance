@@ -1,10 +1,13 @@
 package `in`.iot.lab.iotlabattendance.feature_bottom_navigation.navigation
 
 import android.content.res.Configuration
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -74,11 +77,20 @@ fun BottomBar(
                     else
                         menuItem.unselectedIcon
 
-                    Icon(
-                        imageVector = currentIcon,
+//                    Icon(
+//                        imageVector = currentIcon,
+//                        contentDescription = stringResource(id = menuItem.labelOfIcon),
+////                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+//                    )
+
+                    Image(
+                        painter = painterResource(id = currentIcon),
                         contentDescription = stringResource(id = menuItem.labelOfIcon),
-//                            tint = MaterialTheme.colorScheme.onSecondaryContainer
+                        colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onSecondaryContainer),
+                        modifier = Modifier
+                            .size(24.dp)
                     )
+
                 },
                 label = {
                     if (selected) {
