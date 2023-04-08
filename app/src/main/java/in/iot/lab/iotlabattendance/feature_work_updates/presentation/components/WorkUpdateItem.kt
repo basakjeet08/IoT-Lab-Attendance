@@ -16,7 +16,8 @@ import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.compone
 import `in`.iot.lab.iotlabattendance.feature_work_updates.data.model.WorkUpdateData
 import `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.stateholder.WorkUpdateHistoryViewModel
 import `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.util.WorkUpdateGetState
-
+import java.text.SimpleDateFormat
+import java.util.*
 
 // This is the Preview function of the Screen when Loading
 @Preview("Light")
@@ -50,16 +51,24 @@ fun WorkUpdateItemControl(
             WorkUpdateItemLoading()
         }
         is WorkUpdateGetState.Success -> {
-            LazyColumn {
-                items(150) {
-                    WorkUpdateItemSuccess(
-                        workUpdateData = WorkUpdateData(
-                            date_created = "21129712908",
-                            date_updated = "12341234",
-                            roll = "21051880",
-                            updates = "Auafghakusdhfakjh"
+
+            // This is the List of Work Update Data of the Roll Number
+            val data = (myViewModel.workUpdateGetState as WorkUpdateGetState.Success)
+                .data
+
+            // Checking if the data is empty or not
+            if (data == null || data.isEmpty()) {
+                WorkUpdateItemFailure(
+                    textToShow = R.string.database_is_empty_found_no_records,
+                    tryAgain = { myViewModel.getWorkUpdates() }
+                )
+            } else {
+                LazyColumn {
+                    items(data.size) {
+                        WorkUpdateItemSuccess(
+                            workUpdateData = data[it]
                         )
-                    )
+                    }
                 }
             }
         }
@@ -124,6 +133,14 @@ fun WorkUpdateItemSuccess(
             verticalArrangement = Arrangement.Center,
         ) {
 
+            // Getting the Formatted Creation Date and Time
+            val formattedCreatedDate = timeFormat(workUpdateData.date_created)
+
+            // getting the formatted update Date and Time
+            var formattedUpdatedDate: String? = null
+            if (workUpdateData.date_updated != null)
+                formattedUpdatedDate = timeFormat(workUpdateData.date_created)
+
             // Value Text
             Text(
                 text = "Roll Number : ${workUpdateData.roll}",
@@ -131,6 +148,7 @@ fun WorkUpdateItemSuccess(
                 modifier = Modifier.padding(4.dp)
             )
 
+            // Spacing of 4 dp
             Spacer(modifier = Modifier.height(4.dp))
 
             // Value Text
@@ -140,19 +158,21 @@ fun WorkUpdateItemSuccess(
                 modifier = Modifier.padding(4.dp)
             )
 
+            // Spacing of 4 dp
             Spacer(modifier = Modifier.height(4.dp))
 
             // Value Text
             Text(
-                text = "Date created : ${workUpdateData.date_created}",
+                text = "Created : $formattedCreatedDate",
                 maxLines = 1,
                 modifier = Modifier.padding(4.dp)
             )
 
-            if (workUpdateData.date_updated != null) {
+            // Checking if the Update date is Null of there
+            if (formattedUpdatedDate != null) {
                 // Value Text
                 Text(
-                    text = "Date Updated : ${workUpdateData.date_updated} ",
+                    text = "Updated : $formattedUpdatedDate ",
                     maxLines = 1,
                     modifier = Modifier.padding(4.dp)
                 )
@@ -179,4 +199,23 @@ fun WorkUpdateItemFailure(
             tryAgain()
         }
     }
+}
+
+// This function gives the Formatted Date and Time
+private fun timeFormat(time: String): String? {
+
+    //Format which we received From the API call
+    val formatReceived = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:SS.sss'Z'")
+
+    //Setting TimeZone to Indian which is GMT_5.30
+    formatReceived.timeZone = TimeZone.getTimeZone("GMT+5.30")
+
+    //Setting Our Desired Format of Date and Time
+    val desiredFormat = SimpleDateFormat("dd-MMM-yyyy  'Time : ' hh:mm a")
+
+    //Making Date objects from the in time and out Time strings
+    val dateObject = time.let { formatReceived.parse(it) }
+
+    // Parsing the date Objects which returns the String in the format as specified in desiredFormat variable
+    return dateObject?.let { desiredFormat.format(it) }
 }

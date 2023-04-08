@@ -1,6 +1,6 @@
 package `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.util
 
-import `in`.iot.lab.iotlabattendance.feature_work_updates.data.model.PostWorkUpdateResponse
+import `in`.iot.lab.iotlabattendance.feature_work_updates.data.model.WorkUpdateData
 import `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.util.WorkUpdateGetState.*
 
 /**
@@ -15,6 +15,6 @@ sealed class WorkUpdateGetState {
 
     object Initialized : WorkUpdateGetState()
     object Loading : WorkUpdateGetState()
-    class Success(val postWorkUpdateResponse: List<PostWorkUpdateResponse>) : WorkUpdateGetState()
+    class Success(val data: List<WorkUpdateData>?) : WorkUpdateGetState()
     class Failure(val errorMessage: String) : WorkUpdateGetState()
 }
