@@ -31,9 +31,11 @@ private fun DefaultPreviewLoading() {
     CustomAppTheme {
         SearchBarUI(
             value = "",
-            buttonText = R.string.go,
-            textLabel = R.string.app_name,
-            onValueChange = { }
+            firstButtonText = R.string.go,
+            secondButtonText = R.string.x,
+            textLabel = R.string.roll_no,
+            onValueChange = { },
+            onClickClearButton = { }
         ) {}
     }
 }
@@ -43,10 +45,12 @@ private fun DefaultPreviewLoading() {
 fun SearchBarUI(
     modifier: Modifier = Modifier,
     value: String,
-    buttonText: Int,
+    firstButtonText: Int,
+    secondButtonText: Int,
     textLabel: Int,
     onValueChange: (String) -> Unit,
-    onClickEvent: () -> Unit
+    onClickClearButton: () -> Unit,
+    onClickEventGoButton: () -> Unit
 ) {
 
     val focusManager = LocalFocusManager.current
@@ -90,7 +94,8 @@ fun SearchBarUI(
             keyboardOptions = KeyboardOptions(
                 imeAction = ImeAction.Done,
                 keyboardType = KeyboardType.Number
-            )
+            ),
+            modifier = Modifier.width(200.dp)
         )
 
         Spacer(modifier = Modifier.width(16.dp))
@@ -99,7 +104,7 @@ fun SearchBarUI(
         // This is the Button inside which we keep the Gradient BOX implementation
         Button(
             modifier = modifier,
-            onClick = onClickEvent,
+            onClick = onClickEventGoButton,
             shape = buttonShape,
             colors = ButtonDefaults.buttonColors(
                 containerColor = MaterialTheme.colorScheme.primaryContainer
@@ -108,7 +113,27 @@ fun SearchBarUI(
         ) {
 
             Text(
-                text = stringResource(id = buttonText),
+                text = stringResource(id = firstButtonText),
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+        }
+
+        Spacer(modifier = Modifier.width(16.dp))
+
+        // This is the Button inside which we keep the Gradient BOX implementation
+        Button(
+            modifier = modifier,
+            onClick = onClickClearButton,
+            shape = buttonShape,
+            colors = ButtonDefaults.buttonColors(
+                containerColor = MaterialTheme.colorScheme.primaryContainer
+            ),
+            contentPadding = PaddingValues(8.dp)
+        ) {
+
+            Text(
+                text = stringResource(id = secondButtonText),
                 style = MaterialTheme.typography.headlineSmall,
                 color = MaterialTheme.colorScheme.primary
             )

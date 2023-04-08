@@ -26,6 +26,39 @@ class AttendanceViewModel : ViewModel() {
         private set
 
 
+    var forFixedDay: String = ""
+    var forFixedMonth: String = ""
+    var forFixedYear: String = ""
+    var inTimeBetweenStart: String = ""
+    var inTimeBetweenEnd: String = ""
+
+    var fromDate: String by mutableStateOf("")
+        private set
+    var untilDate: String by mutableStateOf("")
+        private set
+
+    fun updateFromDate(newDate: String) {
+        fromDate = newDate
+    }
+
+    fun updateUntilDate(newDate: String) {
+        untilDate = newDate
+    }
+
+
+    //It contains all the logic and the API calls
+    fun controlFlow() {
+
+        if (fromDate == "" && untilDate == "")
+            getPostByRoll(userRoll)
+        else if (fromDate != "" && untilDate == "")
+            getPostOfFixedDay(forFixedDay, forFixedMonth, forFixedYear)
+        else {
+            getPostBetweenDays("$inTimeBetweenStart,$inTimeBetweenEnd")
+        }
+
+    }
+
     //This calls the repository and ask it to fetch data of roll without filter
     fun getPostByRoll(number: String = userRoll) {
 
@@ -47,8 +80,7 @@ class AttendanceViewModel : ViewModel() {
     }
 
     //This calls the repository and ask it to fetch data of roll of a particular day
-    fun getPostOfFixedDay(
-        rollNumber: String,
+    private fun getPostOfFixedDay(
         inTimeDay: String,
         inTimeMonth: String,
         inTimeYear: String
@@ -65,7 +97,7 @@ class AttendanceViewModel : ViewModel() {
 
                 // Response from the Server
                 myRepository.getPostOfFixedDay(
-                    rollNumber,
+                    userRoll,
                     inTimeDay,
                     inTimeMonth,
                     inTimeYear
@@ -77,7 +109,7 @@ class AttendanceViewModel : ViewModel() {
     }
 
     //This calls the repository and ask it to fetch data of roll within a range
-    fun getPostBetweenDays(rollNumber: String, inTimeBetween: String) {
+    private fun getPostBetweenDays(inTimeBetween: String) {
 
         // Setting the Current State to Loading Before Starting to Fetch Data
         getAttendanceUiState = GetAttendanceUiState.Loading
@@ -90,7 +122,7 @@ class AttendanceViewModel : ViewModel() {
 
                 // Response from the Server
                 myRepository.getPostBetweenDays(
-                    rollNumber,
+                    userRoll,
                     inTimeBetween
                 )
 
@@ -102,5 +134,15 @@ class AttendanceViewModel : ViewModel() {
 
     fun updateUserRoll(newRoll: String) {
         userRoll = newRoll
+    }
+
+    fun resetToDefaults() {
+        forFixedDay = ""
+        forFixedMonth = ""
+        forFixedYear = ""
+        fromDate = ""
+        untilDate = ""
+        inTimeBetweenStart = ""
+        inTimeBetweenEnd = ""
     }
 }
