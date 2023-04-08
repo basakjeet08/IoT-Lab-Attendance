@@ -29,7 +29,7 @@ import `in`.iot.lab.iotlabattendance.core.util.UserRole
 @Composable
 private fun DefaultPreviewLoading() {
     CustomAppTheme {
-        SearchBarUI(
+        AttendanceSearchBarUI(
             value = "",
             firstButtonText = R.string.go,
             secondButtonText = R.string.x,
@@ -42,7 +42,7 @@ private fun DefaultPreviewLoading() {
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun SearchBarUI(
+fun AttendanceSearchBarUI(
     modifier: Modifier = Modifier,
     value: String,
     firstButtonText: Int,

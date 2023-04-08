@@ -23,6 +23,8 @@
     <string name="roll_no">Roll</string>
     <string name="x">X</string>
 
+    <string name="post_work_updates_here">Post Your Work Updates Here</string>
+
     <string name="failed_to_load_data_try_again">Failed to Load Data from the internet! Load Again ??</string>
     <string name="database_is_empty_found_no_records">Database is Empty. Found No Records of the User</string>
 

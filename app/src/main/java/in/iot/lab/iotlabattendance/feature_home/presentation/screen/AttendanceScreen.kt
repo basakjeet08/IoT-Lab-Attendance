@@ -17,7 +17,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import `in`.iot.lab.iotlabattendance.R
 import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 import `in`.iot.lab.iotlabattendance.feature_home.presentation.components.AttendanceEntryCardUIControl
-import `in`.iot.lab.iotlabattendance.feature_home.presentation.components.SearchBarUI
+import `in`.iot.lab.iotlabattendance.feature_home.presentation.components.AttendanceSearchBarUI
 import `in`.iot.lab.iotlabattendance.feature_home.presentation.stateholder.AttendanceViewModel
 import java.util.*
 
@@ -50,7 +50,7 @@ fun AttendanceScreen(
             verticalArrangement = Arrangement.Top,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            SearchBarUI(
+            AttendanceSearchBarUI(
                 value = myViewModel.userRoll,
                 firstButtonText = R.string.go,
                 secondButtonText = R.string.x,

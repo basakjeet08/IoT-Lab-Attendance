@@ -6,7 +6,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import `in`.iot.lab.iotlabattendance.feature_home.presentation.screen.AttendanceScreen
 import `in`.iot.lab.iotlabattendance.feature_home.presentation.screen.WorkUpdateHistoryScreen
-import `in`.iot.lab.iotlabattendance.feature_home.presentation.screen.WorkUpdatePostScreen
+import `in`.iot.lab.iotlabattendance.feature_work_updates.presentation.screens.WorkUpdatePostScreen
 
 /**
  * Navigation Graph : It contains all the Different Routes in the Home Feature
