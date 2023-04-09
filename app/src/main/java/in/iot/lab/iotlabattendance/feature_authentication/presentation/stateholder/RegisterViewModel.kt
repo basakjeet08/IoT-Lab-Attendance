@@ -98,6 +98,7 @@ class RegisterViewModel : ViewModel() {
         showEnterPassword = false
         showReEnterPassword = false
         registrationState = RegistrationState.Initialized
+        askedForAdminRole = false
     }
 
     // This function registers a new user in Firebase

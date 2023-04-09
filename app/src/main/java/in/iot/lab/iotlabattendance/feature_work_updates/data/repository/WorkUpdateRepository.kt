@@ -36,7 +36,13 @@ class WorkUpdateRepository {
 
         // Returning the State according to the Request State
         return if (response.isSuccessful) {
-            WorkUpdateGetState.Success(response.body()!!.data)
+
+            // Sorting the List since the list is coming in wrong Sorted Order
+            val reversedList = response.body()!!.data?.sortedByDescending {
+                it.date_created
+            }
+
+            WorkUpdateGetState.Success(reversedList)
         } else
             WorkUpdateGetState.Failure("Error Connecting to the Server")
     }

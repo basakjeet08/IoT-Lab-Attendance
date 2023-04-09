@@ -64,6 +64,9 @@ fun WorkUpdatePostScreen(
             // Resetting the Api State
             myViewModel.resetApiStateToDefaults()
 
+            // Resetting the data of the Text Field
+            myViewModel.resetUserUpdate()
+
         }
         else -> {
             Toast.makeText(

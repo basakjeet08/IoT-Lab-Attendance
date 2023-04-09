@@ -50,6 +50,11 @@ class WorkUpdatePostViewModel : ViewModel() {
         workUpdateApiState = WorkUpdateApiState.Initialized
     }
 
+    // This function
+    fun resetUserUpdate() {
+        userUpdate = ""
+    }
+
     // This function posts the Work Update in the Database
     fun postWorkUpdate() {
 

@@ -53,7 +53,7 @@ fun AttendanceScreen(
             AttendanceSearchBarUI(
                 value = myViewModel.userRoll,
                 firstButtonText = R.string.go,
-                secondButtonText = R.string.x,
+                secondButtonText = R.string.clear,
                 textLabel = R.string.roll_no,
                 onValueChange = { myViewModel.updateUserRoll(it) },
                 onClickClearButton = { myViewModel.resetToDefaults() }

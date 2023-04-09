@@ -11,7 +11,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.Surface
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusDirection
@@ -28,10 +28,7 @@ import `in`.iot.lab.iotlabattendance.R
 import `in`.iot.lab.iotlabattendance.core.theme.CustomAppTheme
 import `in`.iot.lab.iotlabattendance.core.theme.buttonShape
 import `in`.iot.lab.iotlabattendance.core.theme.custom_icons.Visibility
-import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.CheckBoxUI
-import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.GradientButton
-import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.TextButtonUI
-import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.UserInputUI
+import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.components.*
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.navigation.AuthenticationRoutes
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.stateholder.RegisterViewModel
 import `in`.iot.lab.iotlabattendance.feature_authentication.presentation.util.RegistrationState
@@ -68,10 +65,31 @@ fun RegisterScreen(
     when (myViewModel.registrationState) {
         is RegistrationState.Success -> {
 
-            // Resetting the values inside the ViewModel
-            myViewModel.resetToDefaults()
-            Toast.makeText(context, "Sign Up Successful", Toast.LENGTH_SHORT).show()
-            navController.navigate(AuthenticationRoutes.LoginRoute.route)
+            // Checking if the user opted for Admin Access
+            if (myViewModel.askedForAdminRole) {
+
+                // Showing Alert Dialog Box only to the Admins to prompt them that they opted for access
+                AlertDialogUI(
+                    title = R.string.access_level_requested,
+                    labelText = R.string.your_request_for_admin_access_level
+                ) {
+
+                    // Changing the asked for Admin Role variable to false to show the toast and
+                    // Changing to Login Screen
+                    myViewModel.updateAskedForAdminRole(newValue = false)
+                }
+            }
+
+            // Checking if the User haven't opted for admin access and can be shown toast and redirected
+            if (!myViewModel.askedForAdminRole) {
+
+                // Showing the toast
+                Toast.makeText(context, "Registered Successful", Toast.LENGTH_SHORT).show()
+
+                // Resetting the values inside the ViewModel
+                myViewModel.resetToDefaults()
+                navController.navigate(AuthenticationRoutes.LoginRoute.route)
+            }
         }
         is RegistrationState.Loading -> {
             registrationRequestEmpty = false

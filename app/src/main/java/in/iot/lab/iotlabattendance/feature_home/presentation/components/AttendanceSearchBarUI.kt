@@ -32,7 +32,7 @@ private fun DefaultPreviewLoading() {
         AttendanceSearchBarUI(
             value = "",
             firstButtonText = R.string.go,
-            secondButtonText = R.string.x,
+            secondButtonText = R.string.clear,
             textLabel = R.string.roll_no,
             onValueChange = { },
             onClickClearButton = { }
